@@ -1,0 +1,223 @@
+<!-- templates/contact.html -->
+{% extends 'base.html' %}
+
+{% block title %}Contact Us - ABC teach Institute{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center">
+            <h1 class="display-4 handwriting-font">Contact Us</h1>
+            <p class="lead">Get in touch to start your handwriting journey today</p>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="py-5">
+    <div class="container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+        
+        <div class="row">
+            <div class="col-lg-8 mb-5">
+                <div class="contact-form">
+                    <h3 class="mb-4">Send us a Message</h3>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="name" class="form-label">Full Name *</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label">Email Address *</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="phone" name="phone">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Message *</label>
+                            <textarea class="form-control" id="message" name="message" rows="5" required placeholder="Tell us about your handwriting goals or ask any questions..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-paper-plane me-2"></i>Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="contact-info">
+                    <h3 class="mb-4">Get in Touch</h3>
+                    <div class="contact-item mb-4">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-map-marker-alt fa-2x text-primary me-3"></i>
+                            </div>
+                            <div>
+                                <h5>Address</h5>
+                                <p>123 Education Street<br>Learning City, LC 12345<br>United States</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-item mb-4">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-phone fa-2x text-primary me-3"></i>
+                            </div>
+                            <div>
+                                <h5>Phone</h5>
+                                <p>-primary btn-lg me-3">Explore Courses</a>
+                <a href="{% url 'contact' %}" class="btn btn-outline-light btn-lg">Get Started</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="section-title">Why Choose ABC teach Institute?</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="feature-box">
+                    <i class="fas fa-user-graduate"></i>
+                    <h4>Expert Instructors</h4>
+                    <p>Learn from certified calligraphy masters with years of teaching experience and proven methodologies.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-box">
+                    <i class="fas fa-clock"></i>
+                    <h4>Flexible Schedule</h4>
+                    <p>Choose from morning, evening, or weekend classes that fit your busy lifestyle and learning preferences.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-box">
+                    <i class="fas fa-certificate"></i>
+                    <h4>Certification</h4>
+                    <p>Earn recognized certificates upon completion that validate your handwriting skills and achievements.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="stat-item">
+                    <div class="stat-number">2,500+</div>
+                    <div class="stat-label">Happy Students</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-item">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Expert Instructors</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-item">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Course Programs</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-item">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Success Rate</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Courses -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="section-title">Featured Courses</h2>
+        <div class="row">
+            {% for course in courses %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    {% if course.image %}
+                        <img src="{{ course.image.url }}" class="card-img-top" alt="{{ course.title }}">
+                    {% else %}
+                        <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="{{ course.title }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ course.title }}</h5>
+                        <p class="card-text">{{ course.description|truncatewords:15 }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-primary fw-bold">${{ course.price }}</span>
+                            <small class="text-muted">{{ course.duration }}</small>
+                        </div>
+                        <a href="{% url 'courses' %}" class="btn btn-primary mt-3">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Cursive Writing Basics">
+                    <div class="card-body">
+                        <h5 class="card-title">Cursive Writing Basics</h5>
+                        <p class="card-text">Master the fundamentals of cursive writing with proper letter formation and connection techniques.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-primary fw-bold">$199</span>
+                            <small class="text-muted">8 weeks</small>
+                        </div>
+                        <a href="{% url 'courses' %}" class="btn btn-primary mt-3">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1471107340929-a87cd0f5b5f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Calligraphy Mastery">
+                    <div class="card-body">
+                        <h5 class="card-title">Calligraphy Mastery</h5>
+                        <p class="card-text">Advanced calligraphy techniques for creating beautiful, artistic lettering styles.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-primary fw-bold">$299</span>
+                            <small class="text-muted">12 weeks</small>
+                        </div>
+                        <a href="{% url 'courses' %}" class="btn btn-primary mt-3">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Business Writing">
+                    <div class="card-body">
+                        <h5 class="card-title">Professional Writing</h5>
+                        <p class="card-text">Develop clean, professional handwriting for business and formal documents.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-primary fw-bold">$149</span>
+                            <small class="text-muted">6 weeks</small>
+                        </div>
+                        <a href="{% url 'courses' %}" class="btn btn-primary mt-3">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-4">
+            <a href="{% url 'courses' %}" class="btn btn-primary btn-lg">View All Courses</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

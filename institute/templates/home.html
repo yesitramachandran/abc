@@ -1,0 +1,113 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Home - ABC teach Institute{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h1 class="handwriting-font">Master the Art of Beautiful Handwriting</h1>
+                <p class="lead">Transform your handwriting with our expert instruction and proven techniques. Join thousands of students who have discovered the joy of elegant penmanship.</p>
+                <a href="{% url 'courses' %}" class="btn btn-outline-primary btn-lg">View All Courses</a>
+        </div>
+    </div>
+</section>
+
+<!-- Instructors Section -->
+{% if instructors %}
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="section-title">Meet Our Expert Instructors</h2>
+        <div class="row">
+            {% for instructor in instructors %}
+            <div class="col-md-6 mb-4">
+                <div class="instructor-card">
+                    {% if instructor.image %}
+                        <img src="{{ instructor.image.url }}" class="instructor-img" alt="{{ instructor.name }}">
+                    {% else %}
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="instructor-img" alt="{{ instructor.name }}">
+                    {% endif %}
+                    <h4>{{ instructor.name }}</h4>
+                    <p class="text-primary">{{ instructor.experience }}</p>
+                    <p>{{ instructor.bio|truncatewords:20 }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-4">
+            <a href="{% url 'about' %}" class="btn btn-primary">Meet All Instructors</a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Testimonials Section -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="section-title">What Our Students Say</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="mb-3">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <p class="card-text">"The instructors are amazing! My handwriting has improved dramatically in just 6 weeks."</p>
+                        <h6 class="card-title">- Sarah Johnson</h6>
+                        <small class="text-muted">Cursive Writing Student</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="mb-3">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <p class="card-text">"Professional approach and excellent teaching methods. Highly recommended!"</p>
+                        <h6 class="card-title">- Michael Chen</h6>
+                        <small class="text-muted">Calligraphy Mastery Student</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="mb-3">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <p class="card-text">"Flexible schedule and patient instructors made learning enjoyable and effective."</p>
+                        <h6 class="card-title">- Emily Rodriguez</h6>
+                        <small class="text-muted">Professional Writing Student</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Student Review Video -->
+        <div class="student-review">
+            <h3>What Our Students Say</h3>
+            <video width="640" height="360" controls>
+                <source src="{% static 'student_video/student.mp4' %}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+</section>
+{% endblock %}
